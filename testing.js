@@ -89,10 +89,35 @@ test('checkX', function(t) {
 
 
 
-//////////////// 4. GuessWho ////////////////
+//////////////// 5. Subway ////////////////
+
+function getIncome(person) {
+    return person * 10;
+};
+
+function subway(people, rents) {
+    let peopleIncome = people.map(getIncome);
+    let biggestgap = 0;
+    let gap = 0;
+    let chosenIndex = 0;
+    for (let i = 0; i < peopleIncome.length; i++) {
+            gap = peopleIncome[i] - rents[i];
+            if (gap > biggestgap) {
+                biggestgap = gap;
+                chosenIndex = i; 
+            }
+    }
+    return chosenIndex;
+}
+
+// This doesn't account for a case where there are two (or more) locations that will generate
+// the same profits. The way around that that comes to mind is to output an array of indexes that produce
+// the highest profit 
+
+test('subs', function(t) {
+    t.deepEqual(subway([5, 8, 4, 9, 1], [30, 14, 80, 61, 1]), 1);
+    t.deepEqual(subway([5, 8, 4], [20, 70, 25]), 0);
+    t.deepEqual(subway([5, 8, 4, 9, 9], [30, 14, 80, 61, 1]), 4);
+});
 
 
-
-// test('GuessWho', function(t) {
-//     t.deepEqual(guessWho(), )
-// });
